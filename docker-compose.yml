@@ -1,0 +1,40 @@
+services:
+  ollama:
+    image: ollama/ollama
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_models:/root/.ollama
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  minivault:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: minivault-api:latest
+    container_name: minivault-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./logs:/app/logs
+    restart: unless-stopped
+    env_file:
+      - .env
+    depends_on:
+      ollama:
+        condition: service_healthy
+    entrypoint: >
+      sh -c "
+        ollama pull llama2 &&
+        ollama pull mistral &&
+        python -m app.main
+      "
+
+volumes:
+  ollama_models:

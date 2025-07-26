@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.sqlite3
+.pytest_cache/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Logs
+*.log
+logs/
+
+# IDE/editor stuff
+.vscode/
+.idea/
+
+# Git & artifacts
+.git/
+.gitignore
+
+# Docs & extras
+*.md
+*.zip
+*.tar
+*.tar.gz

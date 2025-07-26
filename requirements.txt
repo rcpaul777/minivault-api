@@ -1,0 +1,10 @@
+fastapi       # For building the FastAPI application
+uvicorn       # For serving the FastAPI application
+psutil        # For system monitoring
+transformers  # Optional for real model
+torch         # Optional for real model
+requests      # For CLI
+pytest        # For testing
+python-dotenv # For environment variables
+pydantic      # For data validation
+ollama        # For ollama CLI commands
